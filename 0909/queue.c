@@ -1,5 +1,5 @@
 
-#include "bt.h"
+#include "main.h"
 #define MAXSIZE 20
 void init_squeue(sq_queue *q)
 {

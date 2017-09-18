@@ -1,4 +1,4 @@
-#include "bt.h"
+#include "main.h"
 
 bt_node * init()
 {
@@ -98,6 +98,39 @@ bt_node * creatil(char *is, char *ls)
 	root->rightchild = creatil(rightchildtree_is, rightchildtree_ls);
 	return root;
 }
+//非递归版本  写一下
+// 如果结点的元素重复   如何创建
+/*
+//老杨写的创建二叉树   递归版本
+bt_node*creatil(char *is,char *ls,int n)
+{
+	if(is ==NULL||ls==NULL||n<0)
+	{
+		return null;
+	}
+	else
+		return creat2(is,ls,n);
+}
+bt_node creat2(char *is,char *ls,int n)
+{
+	bt_node *s=NULL;
+	if( n >0 )
+	{
+		int pos=find___(先在后序中找到根节点的位置）;
+		if(pos==-1)
+		{
+		printf("二叉树序列不合法"）;
+		exit 0;
+		}
+		s=buy_node();
+		s->data=*is;
+		s->leftchild(is,ls,pos);
+		s->rightchild();
+
+	}
+	return NULL;
+
+*/
 
 void insert(bt_node *root, char ch, char *pos)
 {
@@ -201,6 +234,37 @@ int levelorder(bt_node *ptr)
 	两个循环嵌套   外层循环 ：当结点的右子树不为空  将右子树入栈  循环的结束条件是 栈不为空
 					内层循环 ：遍历打印结点的左子树    循环结束条件是 结点至少有一个分支
 */
+int while_firstorder(bt_node *ptr)
+{
+	if (ptr == NULL)
+	{
+		return 0;
+	}
+	stack s;
+	init_stack(&s);
+	while (ptr != NULL ||  !is_empty(&s))
+	{
+		printf("%c ", ptr->data);
+		if(ptr->rightchild != NULL)
+		{
+			push(&s, ptr->rightchild);
+			
+		}
+		if (ptr->leftchild != NULL)
+		{
+			ptr = ptr->leftchild;
+			continue;
+		}
+		ptr =  pop(&s);;
+	
+		
+	}
+}
+/*
+非递归的中序遍历：
+  先根左子树遍历，依次入栈， 如果遇到左子树为空，出栈根元素，入栈右子树  ，
+							如果遇到右子树为空，出栈上一个的根元素，入栈上一个根元素的右子树
+*/
 int while_inorder(bt_node *ptr)
 {
 	if (ptr == NULL)
@@ -209,30 +273,54 @@ int while_inorder(bt_node *ptr)
 	}
 	stack s;
 	init_stack(&s);
-	do  //至少循环一次   已判定了二叉树不为空
+	while (ptr != NULL || !is_empty(&s))
 	{
-		if (!is_empty(&s))  //如果 不为空
+		while (ptr != NULL)
 		{
-			ptr = pop(&s);       //让根节点=右子树
+			push(&s, ptr);
+			ptr = ptr->leftchild;
 		}
+		ptr = pop(&s);
 		printf("%c ", ptr->data);
-		while (ptr->leftchild != NULL || ptr->rightchild != NULL)  //至少有一分支
+		ptr = ptr->rightchild;
+	}
+}
+/*
+非递归的后序遍历  :
+	用一个作为访问过结点的标记指针 bt_node *tag 
+	先不打印根节点  如果根节点的右子树被访问过   ptr->rightchild==tag  打印根节点
+*/
+int while_lastorder(bt_node *ptr)
+{
+	if (NULL == ptr)
+	{
+		return 0;
+	}
+	stack s;
+	init_stack(&s);
+	bt_node *tag=NULL;
+	while (ptr != NULL || !is_empty(&s))
+	{
+		while (ptr != NULL)
 		{
-			if (ptr->leftchild != NULL&&ptr->rightchild != NULL)  //有两个分支
-			{
-				push(&s, ptr->rightchild);  //右孩子入栈
-			}
-			if (ptr->leftchild != NULL)  //有左孩子
-			{
-				ptr = ptr->leftchild;   
-			}
-			else       //有右孩子
-			{
-				ptr = ptr->rightchild;
-			}
-			printf("%c ", ptr->data);
+			push(&s, ptr);
+			ptr = ptr->leftchild;
 		}
-	} while (!is_empty(&s));
+		ptr = pop(&s);
+		if (ptr->rightchild == NULL || ptr->rightchild == tag)
+		{
+			printf("%c ", ptr->data);
+			tag = ptr;
+			ptr = NULL;
+		}
+		else
+		{
+			push(&s, ptr);
+			ptr = ptr->rightchild;
+			
+		}
+		
+	}
 }
 
 bt_node *findvalue(bt_node *root,elem_type value)
@@ -392,23 +480,23 @@ bt_node *find_near_common_parent(bt_node *root, bt_node *node1, bt_node *node2)
 	sq_queue q2;
 	init_squeue(&q1);
 	init_squeue(&q2);
-	bt_node *node = (bt_node*)malloc(sizeof(bt_node));
-	for (node = Find_Parent(root, node1); node->data != root->data; node = Find_Parent(root, node))
+	
+	for (; node1->data != root->data; node1 = Find_Parent(root, node1))
 	{
-		if (node != NULL)
+		if (node1 != NULL)
 		{
-			in_squeue(&q1, node);
+			in_squeue(&q1, node1);  //将孩子结点也入队列  防止其中一个孩子是另一个孩子的父节点的情况
 		}
 	}
-	in_squeue(&q1, node);  //根节点 入队列
-	for (node = Find_Parent(root, node2); node->data != root->data; node = Find_Parent(root, node))
+	in_squeue(&q1, node1);  //根节点 入队列
+	for (; node2->data != root->data; node2 = Find_Parent(root, node2))
 	{
-		if (node != NULL)
+		if (node2 != NULL)
 		{
-			in_squeue(&q2, node);
+			in_squeue(&q2, node2);
 		}
 	}
-	in_squeue(&q2, node);
+	in_squeue(&q2, node2);
 	bt_node *temp1 = (bt_node*)malloc(sizeof(bt_node));
 	bt_node *temp2 = (bt_node*)malloc(sizeof(bt_node));
 	int lenth1 = lenth_squeue(&q1);

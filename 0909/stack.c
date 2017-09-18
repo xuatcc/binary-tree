@@ -1,4 +1,4 @@
-#include "bt.h"
+#include "main.h"
 
 void init_stack(stack *s) //初始化   
 {
@@ -9,7 +9,7 @@ void init_stack(stack *s) //初始化
 }
 bool is_empty(stack *s)//判空
 {
-	if (s->count == 0)
+	if (s==NULL||s->count == 0)
 		return true;
 	return false;
 }
@@ -41,7 +41,7 @@ bt_node*  pop(stack *s)//出栈
 	if (s->count == 0)
 	{
 		printf("栈已空！\n");
-		return false;
+		return NULL;
 	}
 	node *delnode = s->top;
 	bt_node *e = (bt_node*)malloc(sizeof(bt_node));

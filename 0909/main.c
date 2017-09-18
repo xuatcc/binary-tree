@@ -1,4 +1,4 @@
-#include "bt.h"
+#include "main.h"
 
 int main()
 {
@@ -50,29 +50,41 @@ int main()
 
 	
 	//根据二叉树遍历   测试成功
-	printf("递归版本的前序遍历：");
-	firstorder(root);
-/*	printf("\n中序遍历：");
-	inorder(root);
-	printf("\n后序遍历：");
+/*	printf("\n递归版本的后序遍历：");
 	lastorder(root);
+	printf("\n递归版本的中序遍历：");
+	inorder(root);
+
+	
+	
 	printf("\n");
 	
 	//层次遍历  测试成功
 	printf("层次遍历：");
 	levelorder(root);
-*/	
+	*/
+
+	printf("递归版本的前序遍历：");
+	firstorder(root);
+
 	printf("\n循环版本的前序遍历：");  //测试成功
+	while_firstorder(root);
+	printf("\n");	
+/*	
+	printf("\n循环版本的中序遍历：");  
 	while_inorder(root);
 	printf("\n");
-
-
+	printf("\n循环版本的后序遍历：");
+	while_lastorder(root);
+	printf("\n");
+	
+*/
 	/* 
 	//寻找两个子结点的共同的最近的父节点         测试成功
 	bt_node *node1 = (bt_node *)malloc(sizeof(bt_node));
 	node1 = root->leftchild->leftchild->leftchild;
 	bt_node *node2 = (bt_node *)malloc(sizeof(bt_node));
-	node2 = root->rightchild->rightchild->rightchild;
+	node2 = root->leftchild->leftchild;
 	bt_node *node3 = (bt_node *)malloc(sizeof(bt_node));
 	node3 = find_near_common_parent(root, node1, node2);
 	printf("the childnode no.1 is %c\n", node1->data);
