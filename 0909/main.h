@@ -5,6 +5,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <stdbool.h>
+#include <math.h>
 #include "bt.h"
 #include "queue.h"
 #include "stack.h"

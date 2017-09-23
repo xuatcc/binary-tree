@@ -207,8 +207,15 @@ int lastorder(bt_node *ptr)
 	}
 
 }
+/*
+层次遍历  （广度优先遍历）
+*/
 int levelorder(bt_node *ptr)
 {
+	if (ptr == NULL)
+	{
+		return 0;
+	}
 	sq_queue q; //定义一个 顺序队列 
 	init_squeue(&q);
 	in_squeue(&q, ptr);
@@ -227,6 +234,27 @@ int levelorder(bt_node *ptr)
 		}
 	}
 }
+void print_k_level(bt_node *ptr, int k)
+{
+	if (ptr == NULL)
+	{
+		return 0;
+	}
+	if (ptr != NULL && k == 0)
+	{
+		printf("%c  ", ptr->data);
+		return 0;
+	}
+	if (ptr->leftchild != NULL)
+	{
+		print_k_level(ptr->leftchild, k - 1);
+	}
+	if (ptr->rightchild != NULL)
+	{
+		print_k_level(ptr->rightchild, k - 1);
+	}
+}
+
 
 /*
 非递归的先序遍历
@@ -452,6 +480,10 @@ int node_has_onechild_number(bt_node *ptr)
 
 int depth(bt_node *root)
 {
+	if (root == NULL)
+	{
+		return 0;
+	}
 	int i=0, j=0;
 	if (root->leftchild == NULL&&root->rightchild == NULL)
 	{
@@ -515,6 +547,96 @@ bt_node *find_near_common_parent(bt_node *root, bt_node *node1, bt_node *node2)
 		}
 	}
 	return NULL;
+}
+
+/*
+判断是否是完全二叉树  思想：
+	对一颗二叉树，计算它的深度
+	对同样深度的满二叉树   做层次遍历
+	如果遇到空  但队列之后仍有元素   则不是完全二叉树 
+*/
+bool is_complete_tree(bt_node *root)
+{
+	if (is_full_tree)  //满二叉树 一定是完全二叉树
+	{
+		return true; 
+	}
+
+	int dep = depth(root);
+	sq_queue q; //定义一个 顺序队列 
+	init_squeue(&q);
+
+	//定义一个放空元素的结点
+	bt_node *none_node = (bt_node*)malloc(sizeof(bt_node));
+	none_node->data = '0';
+	none_node->leftchild = NULL;
+	none_node->rightchild = NULL;
+
+	in_squeue(&q, root);
+	while (lenth_squeue(&q) != 0)
+	{
+		bt_node *temp = (bt_node*)malloc(sizeof(bt_node));
+		temp = out_squeue(&q);
+		//printf("%c ", temp->data);   //层次遍历的打印
+		while (temp->data == '0')   //遇到空结点  但是之后仍有元素
+		{	
+			if (lenth_squeue(&q) == 0)
+			{
+				return true;
+			}
+			temp = out_squeue(&q);
+			if (temp->data != '0')
+			{
+				return false;  //不是完全二叉树
+			}
+				
+		}
+		
+		if (temp->leftchild != NULL)
+		{
+			in_squeue(&q, temp->leftchild);
+		}
+		else  //左 为空
+		{
+			in_squeue(&q, none_node);
+		}
+		if (temp->rightchild != NULL)
+		{
+			in_squeue(&q, temp->rightchild);
+		}
+		else   //右为空
+		{
+			in_squeue(&q, none_node);
+		}
+	}
+}
+
+/*
+	一个深度为k，节点个数为 2 ^ k - 1 的二叉树为满二叉树。
+*/
+bool is_full_tree(bt_node *root)
+{
+	int dep = depth(root);
+	int node_num = node_number(root);
+	if ((pow(2, dep) - 1) == node_num)
+	{
+		return  true;
+	}
+	return false;
+}
+
+/*
+判断 是否是平衡二叉树   平衡二叉树的 左右子树高度差 不超过1  
+*/
+bool isAVL(bt_node * root)
+{
+	if (!root)   //空树也是平衡二叉树
+		return true;
+	int ldepth = depth(root->leftchild);
+	int rdepth = depth(root->rightchild);
+	int abs_depth = abs(ldepth - rdepth);
+	//printf("ldepth=%d,rdepth=%d\n", ldepth, rdepth);
+	return (abs_depth <= 1) && isAVL(root->leftchild) && isAVL(root->rightchild);
 }
 
 /*

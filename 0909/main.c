@@ -3,9 +3,9 @@
 int main()
 {
 	//bt_node *root=creat();//用带#号的前序 构建二叉树  测试成功
-	char fs[MAX] = { "ABDHKECFIGJ" };
-	char is[MAX] = { "HKDBEAIFCGJ" };
-	char ls[MAX] = { "KHDEBIFJGCA" };
+	char fs[MAX] = { "ABDECFG" };
+	char is[MAX] = { "DBEAFCG" };
+	char ls[MAX] = { "DEBFGCA" };
 	
 	bt_node *root = (bt_node *)malloc(sizeof(bt_node));
 	root = creatfi(fs, is);      //用前序和中序构建二叉树  测试成功
@@ -54,23 +54,20 @@ int main()
 	lastorder(root);
 	printf("\n递归版本的中序遍历：");
 	inorder(root);
-
-	
-	
 	printf("\n");
 	
 	//层次遍历  测试成功
 	printf("层次遍历：");
 	levelorder(root);
 	*/
-
+/*	
 	printf("递归版本的前序遍历：");
 	firstorder(root);
 
 	printf("\n循环版本的前序遍历：");  //测试成功
 	while_firstorder(root);
 	printf("\n");	
-/*	
+
 	printf("\n循环版本的中序遍历：");  
 	while_inorder(root);
 	printf("\n");
@@ -103,8 +100,15 @@ int main()
 	func2();   //打印一个集合的所有子集    测试成功
 	*/
 
+	/*
+	//   测试成功    判断一棵树是否是完全二叉树  平衡二叉树  满二叉树
+	
+	printf("if the tree is a complete tree = %d\n", is_complete_tree(root));
+	printf("if the tree is a full tree = %d\n", is_full_tree(root));
+	printf("if the tree is a full tree = %d\n", isAVL(root));
+*/
 
-
+	print_k_level(root, 2);   //打印第k层   根节点为第0 层
 }
 
 /*

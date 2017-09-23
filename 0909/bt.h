@@ -3,7 +3,7 @@
 
 
 
-#define MAX 15
+#define MAX 20
 typedef char elem_type;
 typedef struct bt_node
 {
@@ -27,6 +27,7 @@ int firstorder(bt_node *ptr);     //前序遍历
 int lastorder(bt_node *ptr);      //后序遍历
 int levelorder(bt_node *ptr);    // 层次遍历
 
+void print_k_level(bt_node *ptr, int k);   //打印第k层
 /*
 非递归的先序遍历
 我的算法思想：
@@ -50,9 +51,9 @@ int depth(bt_node *root);    //计算二叉树的深度
 bt_node *find_near_common_parent(bt_node *root, bt_node *node1, bt_node *node2);
 //寻找两个子结点的共同的最近的父节点
 
-
-
-
+bool is_complete_tree(bt_node *root);
+bool is_full_tree(bt_node *root);
+bool isAVL(bt_node * root);
 
 /*
 打印一个集合的所有子集
