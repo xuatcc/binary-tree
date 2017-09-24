@@ -628,7 +628,7 @@ bool is_full_tree(bt_node *root)
 /*
 判断 是否是平衡二叉树   平衡二叉树的 左右子树高度差 不超过1  
 */
-bool isAVL(bt_node * root)
+bool is_balance_tree(bt_node * root)
 {
 	if (!root)   //空树也是平衡二叉树
 		return true;
@@ -636,7 +636,20 @@ bool isAVL(bt_node * root)
 	int rdepth = depth(root->rightchild);
 	int abs_depth = abs(ldepth - rdepth);
 	//printf("ldepth=%d,rdepth=%d\n", ldepth, rdepth);
-	return (abs_depth <= 1) && isAVL(root->leftchild) && isAVL(root->rightchild);
+	return (abs_depth <= 1) && is_balance_tree(root->leftchild) && is_balance_tree(root->rightchild);
+}
+
+bool is_bstree(bt_node *root)
+{
+	if (!root)
+		return true;
+	bool tag = 0;
+	if (root->leftchild->data < root->data && root->data < root->rightchild->data)
+	{
+		tag = true;   //真  二叉排序树
+	}
+	else
+		return tag && is_bstree(root->leftchild) && is_bstree(root->rightchild);
 }
 
 /*

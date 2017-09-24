@@ -51,10 +51,10 @@ int depth(bt_node *root);    //计算二叉树的深度
 bt_node *find_near_common_parent(bt_node *root, bt_node *node1, bt_node *node2);
 //寻找两个子结点的共同的最近的父节点
 
-bool is_complete_tree(bt_node *root);
-bool is_full_tree(bt_node *root);
-bool isAVL(bt_node * root);
-
+bool is_complete_tree(bt_node *root);   //是否是完全二叉树
+bool is_full_tree(bt_node *root);   //是否是满二叉树
+bool is_balance_tree(bt_node * root);         //是否是平衡二叉树
+bool is_bstree(bt_node *root);  //是否是二叉排序树
 /*
 打印一个集合的所有子集
 */

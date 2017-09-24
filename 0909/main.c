@@ -100,13 +100,14 @@ int main()
 	func2();   //打印一个集合的所有子集    测试成功
 	*/
 
-	/*
+	/**/
 	//   测试成功    判断一棵树是否是完全二叉树  平衡二叉树  满二叉树
 	
 	printf("if the tree is a complete tree = %d\n", is_complete_tree(root));
 	printf("if the tree is a full tree = %d\n", is_full_tree(root));
-	printf("if the tree is a full tree = %d\n", isAVL(root));
-*/
+	printf("if the tree is a full tree = %d\n", is_balance_tree(root));
+	printf("if the tree is a binary sort tree=%d\n",is_bstree(root));
+
 
 	print_k_level(root, 2);   //打印第k层   根节点为第0 层
 }
