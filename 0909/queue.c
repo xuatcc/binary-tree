@@ -40,10 +40,10 @@ bt_node * out_squeue(sq_queue *q)
 bool destory_squeue(sq_queue *q) //顺序表是数组实现 不能销毁 只能清空
 {
 	int len = lenth_squeue(q);
-	elem_type val;
+	bt_node *val=NULL;
 	for (int i = 0; i < len; i++)
 	{
-		out_squeue(q, &val);
+		val=out_squeue(q);
 	}
 	return true;
 }

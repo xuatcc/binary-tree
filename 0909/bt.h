@@ -22,9 +22,9 @@ bt_node * creatil(char *is, char *ls);       //根据中序和后续遍历  创建二叉树
 bt_node * init();   //   用做测试遍历结果的 初始化二叉树  已废弃的方法
 void insert(bt_node *root, char ch, char *pos);      //   同上
 */
-int  inorder(bt_node *ptr);   //根据二叉树  打印中序遍历结果
-int firstorder(bt_node *ptr);     //前序遍历
-int lastorder(bt_node *ptr);      //后序遍历
+void  inorder(bt_node *ptr);   //根据二叉树  打印中序遍历结果
+void  firstorder(bt_node *ptr);     //前序遍历
+void lastorder(bt_node *ptr);      //后序遍历
 int levelorder(bt_node *ptr);    // 层次遍历
 
 void print_k_level(bt_node *ptr, int k);   //打印第k层

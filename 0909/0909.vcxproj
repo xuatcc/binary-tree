@@ -79,15 +79,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="bt.c" />
-    <ClCompile Include="main.c" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="queue.c" />
     <ClCompile Include="stack.c" />
+    <ClCompile Include="Thread_btree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bt.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="queue.h" />
     <ClInclude Include="stack.h" />
+    <ClInclude Include="Thread_btree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

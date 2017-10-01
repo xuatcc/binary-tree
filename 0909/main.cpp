@@ -1,5 +1,7 @@
 #include "main.h"
 
+
+
 int main()
 {
 	//bt_node *root=creat();//用带#号的前序 构建二叉树  测试成功
@@ -7,8 +9,27 @@ int main()
 	char is[MAX] = { "DBEAFCG" };
 	char ls[MAX] = { "DEBFGCA" };
 	
-	bt_node *root = (bt_node *)malloc(sizeof(bt_node));
-	root = creatfi(fs, is);      //用前序和中序构建二叉树  测试成功
+	thread_btree *root = creat_thrtree_byf();  //测试成功  用带井号的先序创建五元组二叉树
+	//thread_btree *root = creat_thrtree_fi(fs, is);// 测试成功  用前序和后序创建五元组二叉树
+	//inorder_thrtree(root);     //测试 成功  中序遍历
+	/*
+	make_thread_tree_by_inorder(root);  //按照中序遍历 线索化二叉树
+	thr_inorder(root);  //中序遍历打印
+	thr_inorder_res(root);  //  中序遍历逆序
+	//测试成功
+	*/
+
+	/*
+	//测试成功
+	make_thread_tree_by_firstorder(root);//按照前序遍历线索化二叉树
+	thr_firstorder(root);//非递归的前序遍历打印
+	*/
+
+	make_thread_tree_by_lastorder(root);//按照后序遍历线索化二叉树
+	thr_lastorder(root);//非递归的后序遍历打印
+
+	//bt_node *root = (bt_node *)malloc(sizeof(bt_node));
+//	root = creatfi(fs, is);      //用前序和中序构建二叉树  测试成功
 	//root = creatil(is, ls);   //用中序和后序构建二叉树  测试成功
 
 	/*///在二叉树中查找value    测试成功
@@ -49,8 +70,8 @@ int main()
 	*/
 
 	
-	//根据二叉树遍历   测试成功
-/*	printf("\n递归版本的后序遍历：");
+/*	//根据二叉树遍历   测试成功
+	printf("\n递归版本的后序遍历：");
 	lastorder(root);
 	printf("\n递归版本的中序遍历：");
 	inorder(root);
@@ -59,9 +80,8 @@ int main()
 	//层次遍历  测试成功
 	printf("层次遍历：");
 	levelorder(root);
-	*/
-/*	
-	printf("递归版本的前序遍历：");
+
+	printf("\n递归版本的前序遍历：");
 	firstorder(root);
 
 	printf("\n循环版本的前序遍历：");  //测试成功
@@ -74,8 +94,8 @@ int main()
 	printf("\n循环版本的后序遍历：");
 	while_lastorder(root);
 	printf("\n");
-	
-*/
+	*/
+
 	/* 
 	//寻找两个子结点的共同的最近的父节点         测试成功
 	bt_node *node1 = (bt_node *)malloc(sizeof(bt_node));
@@ -100,8 +120,8 @@ int main()
 	func2();   //打印一个集合的所有子集    测试成功
 	*/
 
-	/**/
-	//   测试成功    判断一棵树是否是完全二叉树  平衡二叉树  满二叉树
+	/*
+	//   测试成功    判断一棵树是否是完全二叉树  平衡二叉树  满二叉树  二叉排序树
 	
 	printf("if the tree is a complete tree = %d\n", is_complete_tree(root));
 	printf("if the tree is a full tree = %d\n", is_full_tree(root));
@@ -110,6 +130,16 @@ int main()
 
 
 	print_k_level(root, 2);   //打印第k层   根节点为第0 层
+	
+	*/
+
+/*
+以下是线索化二叉树的测试
+*/
+	
+
+
+
 }
 
 /*

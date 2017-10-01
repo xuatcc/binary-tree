@@ -149,36 +149,18 @@ void insert(bt_node *root, char ch, char *pos)
 	child->parent = root;
 }
 
-int  inorder(bt_node *ptr)
+void  inorder(bt_node *ptr)
 {
-	if (ptr == NULL)
-	{
-		return 0;
-	}
-	else if (ptr->leftchild == NULL&&ptr->rightchild == NULL)
-	{
-		printf("%c ", ptr->data);
-		return 0;
-	}
-	else
+	if (ptr != NULL)
 	{
 		inorder(ptr->leftchild);
 		printf("%c ", ptr->data);
 		inorder(ptr->rightchild);
 	}
 }
-int firstorder(bt_node *ptr)
+void firstorder(bt_node *ptr)
 {
-	if (ptr == NULL)
-	{
-		return 0;
-	}
-	else if (ptr->leftchild == NULL&&ptr->rightchild == NULL)
-	{
-		printf("%c ", ptr->data);
-		return 0;
-	}
-	else
+	if (ptr != NULL)
 	{
 		printf("%c ", ptr->data);
 		firstorder(ptr->leftchild);
@@ -187,18 +169,9 @@ int firstorder(bt_node *ptr)
 	}
 
 }
-int lastorder(bt_node *ptr)
+void lastorder(bt_node *ptr)
 {
-	if (ptr == NULL)
-	{
-		return 0;
-	}
-	else if (ptr->leftchild == NULL&&ptr->rightchild == NULL)
-	{
-		printf("%c ", ptr->data);
-		return 0;
-	}
-	else
+	if (ptr != NULL)
 	{
 
 		lastorder(ptr->leftchild);
@@ -312,6 +285,7 @@ int while_inorder(bt_node *ptr)
 		printf("%c ", ptr->data);
 		ptr = ptr->rightchild;
 	}
+	return 0;
 }
 /*
 非递归的后序遍历  :
@@ -349,6 +323,7 @@ int while_lastorder(bt_node *ptr)
 		}
 		
 	}
+	return 0;
 }
 
 bt_node *findvalue(bt_node *root,elem_type value)
@@ -557,7 +532,7 @@ bt_node *find_near_common_parent(bt_node *root, bt_node *node1, bt_node *node2)
 */
 bool is_complete_tree(bt_node *root)
 {
-	if (is_full_tree)  //满二叉树 一定是完全二叉树
+	if (is_full_tree(root))  //满二叉树 一定是完全二叉树
 	{
 		return true; 
 	}
