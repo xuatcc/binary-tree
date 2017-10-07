@@ -11,5 +11,12 @@
 #include "queue.h"
 #include "stack.h"
 #include "Thread_btree.h"
+/*
 
+
+#define MY_ASSERT(statement)  if(!statement) \
+	{	\
+	exit(1);  \
+	}
+*/
 #endif
